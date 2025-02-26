@@ -17,7 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+# path with greater chance to run earlier, reduce response time
+# 1st resources route to admin app, Django built in
 urlpatterns = [
-    path('', include('pages.urls')),
-    path('admin/', admin.site.urls), #1st resources route to admin app, Django built in 
-]
+    path('', include('pages.urls')), 
+    path('listings/', include('listings.urls')),
+    path('admin/', admin.site.urls),
+]  
+

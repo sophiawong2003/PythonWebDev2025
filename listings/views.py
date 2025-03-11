@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from . models import Listing    # . means from same level
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q, F
+from listings.choices import price_choices, bedroom_choices, district_choices
+
 # Create your views here.
 def listings(request):
-    #listings = Listing.objects.all()     #take all variables from Listing class DB hold by listings
+    # listings = Listing.objects.filter(district= F('address'))
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)
     paginator = Paginator(listings, 3)  #based on class Paginator, 3 in a group
     page = request.GET.get('page')

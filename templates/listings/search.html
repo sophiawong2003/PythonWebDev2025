@@ -127,7 +127,7 @@
               <div class="col-12"><i class="fas fa-user"></i> {{listing.realtor}}</div>
             </div>
             <div class="row text-secondary pb-2">
-              <div class="col-6"><i class="fas fa-clock"></i> {{listing.list_date | timesince}}</div>
+              <div class="col-12"><i class="fas fa-clock"></i> {{listing.list_date | timesince}}</div>
             </div>
             <hr />
             <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block"
@@ -141,6 +141,46 @@
       <div class="col-6">
         <p>No Result Found !</p>
       </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <!--django pagination -->
+      {% if listings.has_other_pages %}  
+      <ul class="pagination">
+        {% if listings.has_previous %}
+        <li class="page-item">
+          <a href="?page={{listings.previous_page_number}}&{{values.urlencode}}" class="page-link">&laquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#">&laquo;</a>
+        </li>
+        {% endif %}
+        <!--for loop all the page number-->
+        {% for i in listings.paginator.page_range %}
+        <!--if page number eq to current page then display the number and go nowhere-->
+        {% if listings.number == i %}
+        <li class="page-item active">
+          <a class="page-link">{{i}}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{i}}&{{values.urlencode}}">{{i}}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if listings.has_next %}
+        <li class="page-item">
+          <a href="?page={{listings.next_page_number}}&{{values.urlencode}}" class="page-link">&raquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#">&raquo;</a>
+        </li>
+        {% endif %}
+      </ul>
       {% endif %}
     </div>
   </div>

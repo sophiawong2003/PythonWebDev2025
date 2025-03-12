@@ -1,6 +1,4 @@
-{% extends "base.html" %} {% load humanize %} {% block content %} {% comment %}
-<h1>index</h1>
-{% endcomment %}
+{% extends "base.html" %} {% load humanize %} {% block content %}
 <!-- Showcase -->
 <section id="showcase">
   <div class="container text-center">
@@ -13,7 +11,6 @@
           Consectetur, id commodi!
         </p>
         <div class="search">
-          {% comment %} fix search.html {% endcomment %}
           <form action="{% url 'search' %}">
             <!-- Form Row 1 -->
             <div class="form-row">
@@ -24,6 +21,7 @@
                   name="keywords"
                   class="form-control"
                   placeholder="Keyword (Bathrooms, ClubHouse, etc)"
+                  
                 />
               </div>
 
@@ -34,15 +32,14 @@
                   name="title"
                   class="form-control"
                   placeholder="Title"
+                  
                 />
               </div>
 
               <div class="col-md-4 mb-3">
                 <label class="sr-only">District</label>
                 <select name="district" class="form-control">
-                  <option selected="true" disabled="disabled">
-                    District (All)
-                  </option>
+                  <option selected="true" value="">District (All)</option>
                   {% for key, value in district_choices.items %}
                   <option value="{{key}}">{{value}}</option>
                   {% endfor %}
@@ -54,9 +51,7 @@
               <div class="col-md-6 mb-3">
                 <label class="sr-only">Bedrooms</label>
                 <select name="bedrooms" class="form-control">
-                  <option selected="true" disabled="disabled">
-                    Bedrooms (All)
-                  </option>
+                  <option selected="true" value="">Bedrooms (Any)</option>
                   {% for key, value in bedroom_choices.items %}
                   <option value="{{key}}">{{value}}</option>
                   {% endfor %}
@@ -64,9 +59,7 @@
               </div>
               <div class="col-md-6 mb-3">
                 <select name="price" class="form-control" id="type">
-                  <option selected="true" disabled="disabled">
-                    Max Price (Any)
-                  </option>
+                  <option selected="true" value="">Max Price (Any)</option>
                   {% for key, value in price_choices.items %}
                   <option value="{{key}}">{{value}}</option>
                   {% endfor %}
